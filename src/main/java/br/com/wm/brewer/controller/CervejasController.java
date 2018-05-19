@@ -1,5 +1,7 @@
 package br.com.wm.brewer.controller;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,8 @@ public class CervejasController {
 		//logger.info("Teste info");
 		//logger.debug("Teste debug");
 		
-		cervejas.findAll(); // Apagar...
+		Optional<Cerveja> cervejaOptional = cervejas.findBySkuIgnoreCase("AAA111"); //apagar
+		System.out.println(cervejaOptional.isPresent());
 		
 		return "cerveja/CadastroCerveja";
 	}
