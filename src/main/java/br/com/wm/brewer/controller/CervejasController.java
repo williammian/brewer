@@ -15,15 +15,19 @@ import br.com.wm.brewer.model.Cerveja;
 import br.com.wm.brewer.model.Origem;
 import br.com.wm.brewer.model.Sabor;
 import br.com.wm.brewer.repository.Estilos;
+import br.com.wm.brewer.service.CadastroCervejaService;
 
 @Controller
 public class CervejasController {
 	
-	//@Autowired
-	//private Cervejas cervejas;
-	
 	@Autowired
 	private Estilos estilos;
+	
+	@Autowired
+	private CadastroCervejaService cadastroCervejaService;
+	
+	//@Autowired
+	//private Cervejas cervejas;
 	
 	//private static Logger logger = LoggerFactory.getLogger(CervejasController.class);
 	
@@ -35,7 +39,19 @@ public class CervejasController {
 		mv.addObject("origens", Origem.values());
 		return mv;
 	}
-
+	
+	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.POST)
+	public ModelAndView cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes attributes) {
+		if (result.hasErrors()) {
+			return novo(cerveja);
+		}
+		
+		cadastroCervejaService.salvar(cerveja);
+		attributes.addFlashAttribute("mensagem", "Cerveja salva com sucesso!");
+		
+		return new ModelAndView("redirect:/cervejas/novo");
+	}
+	
 //	@RequestMapping("/cervejas/novo")
 //	public String novo(Cerveja cerveja) {
 //		//logger.info("Teste info");
@@ -46,24 +62,4 @@ public class CervejasController {
 //		
 //		return "cerveja/CadastroCerveja";
 //	}
-	
-	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.POST)
-	public ModelAndView cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes attributes) {
-		/*if (result.hasErrors()) {
-			return novo(cerveja);
-		}*/
-	
-		// Salvar no banco de dados...
-		attributes.addFlashAttribute("mensagem", "Cerveja salva com sucesso!");
-		System.out.println(">>> sku: " + cerveja.getSku());
-		System.out.println(">>> sabor: " + cerveja.getSabor());
-		System.out.println(">>> Origem: " + cerveja.getOrigem());
-		
-		System.out.println("cerveja.getEstilo(): " + cerveja.getEstilo());
-		if (cerveja.getEstilo() != null)
-			System.out.println(">>> Estilo: " + cerveja.getEstilo().getCodigo());
-		
-		return new ModelAndView("redirect:/cervejas/novo");
-	}
-	
 }
