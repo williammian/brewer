@@ -59,6 +59,7 @@ public class CidadesController {
 		return cidades.findByEstadoCodigo(codigoEstado);
 	}
 	
+	//@Secured("ROLE_CADASTRAR_CIDADE") //adicionando segurança no método
 	@PostMapping("/nova")
 	@CacheEvict(value = "cidades", key = "#cidade.estado.codigo", condition = "#cidade.temEstado()")
 	public ModelAndView salvar(@Valid Cidade cidade, BindingResult result, RedirectAttributes attributes) {
