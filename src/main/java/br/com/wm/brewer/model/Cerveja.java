@@ -41,7 +41,7 @@ public class Cerveja {
 	private String nome;
 
 	@NotBlank(message = "A descrição é obrigatória")
-	@Size(max = 50, message = "O tamanho da descrição deve estar entre 1 e 50")
+	@Size(max = 200, message = "O tamanho da descrição deve estar entre 1 e 200")
 	private String descricao;
 
 	@NotNull(message = "Valor é obrigatório")
