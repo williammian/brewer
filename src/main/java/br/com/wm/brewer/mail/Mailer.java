@@ -17,7 +17,7 @@ public class Mailer {
 	@Async
 	public void enviar(Venda venda) {
 		SimpleMailMessage mensagem = new SimpleMailMessage();
-		mensagem.setFrom("williammian@gmail.com.br");
+		mensagem.setFrom("william_mian@yahoo.com.br");
 		mensagem.setTo(venda.getCliente().getEmail());
 		mensagem.setSubject("Venda Efetuada");
 		mensagem.setText("Obrigado, sua venda foi processada!");
