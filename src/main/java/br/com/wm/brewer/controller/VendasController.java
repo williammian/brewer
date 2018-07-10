@@ -28,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.wm.brewer.controller.page.PageWrapper;
 import br.com.wm.brewer.controller.validator.VendaValidator;
 import br.com.wm.brewer.dto.VendaMes;
+import br.com.wm.brewer.dto.VendaOrigem;
 import br.com.wm.brewer.mail.Mailer;
 import br.com.wm.brewer.model.Cerveja;
 import br.com.wm.brewer.model.ItemVenda;
@@ -188,6 +189,11 @@ public class VendasController {
 	@GetMapping("/totalPorMes")
 	public @ResponseBody List<VendaMes> listarTotalVendaPorMes() {
 		return vendas.totalPorMes();
+	}
+	
+	@GetMapping("/porOrigem")
+	public @ResponseBody List<VendaOrigem> vendasPorNacionalidade() {
+		return this.vendas.totalPorOrigem();
 	}
 
 	private ModelAndView mvTabelaItensVenda(String uuid) {
