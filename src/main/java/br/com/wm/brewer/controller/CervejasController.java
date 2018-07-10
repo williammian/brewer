@@ -84,6 +84,13 @@ public class CervejasController {
 		return cervejas.porSkuOuNome(skuOuNome);
 	}
 	
+	@GetMapping("/{codigo}")
+	public ModelAndView editar(@PathVariable("codigo") Cerveja cerveja) {
+		ModelAndView mv = nova(cerveja);
+		mv.addObject(cerveja);
+		return mv;
+	}
+	
 	@DeleteMapping("/{codigo}")
 	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("codigo") Cerveja cerveja) {
 		try {
@@ -92,12 +99,5 @@ public class CervejasController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 		return ResponseEntity.ok().build();
-	}
-	
-	@GetMapping("/{codigo}")
-	public ModelAndView editar(@PathVariable("codigo") Cerveja cerveja) {
-		ModelAndView mv = nova(cerveja);
-		mv.addObject(cerveja);
-		return mv;
 	}
 }

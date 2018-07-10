@@ -10,7 +10,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +26,7 @@ import br.com.wm.brewer.model.Estilo;
 import br.com.wm.brewer.repository.Estilos;
 import br.com.wm.brewer.repository.filter.EstiloFilter;
 import br.com.wm.brewer.service.CadastroEstiloService;
+import br.com.wm.brewer.service.exception.ImpossivelExcluirEntidadeException;
 import br.com.wm.brewer.service.exception.NomeEstiloJaCadastradoException;
 
 @Controller
@@ -40,8 +44,8 @@ public class EstilosController {
 		return new ModelAndView("estilo/CadastroEstilo");
 	}
 	
-	@RequestMapping(value = "/novo", method = RequestMethod.POST)
-	public ModelAndView cadastrar(@Valid Estilo estilo, BindingResult result, RedirectAttributes attributes) {
+	@PostMapping({ "/novo", "{\\+d}" })
+	public ModelAndView salvar(@Valid Estilo estilo, BindingResult result, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
 			return novo(estilo);
 		}
@@ -75,6 +79,24 @@ public class EstilosController {
 		PageWrapper<Estilo> paginaWrapper = new PageWrapper<>(estilos.filtrar(estiloFilter, pageable), httpServletRequest);
 		mv.addObject("pagina", paginaWrapper);
 		return mv;
+	}
+	
+	@GetMapping("/{codigo}")
+	public ModelAndView editar(@PathVariable Long codigo) {
+		Estilo estilo = estilos.findOne(codigo);
+		ModelAndView mv = novo(estilo);
+		mv.addObject(estilo);
+		return mv;
+	}
+	
+	@DeleteMapping("/{codigo}")
+	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("codigo") Estilo estilo) {
+		try {
+			cadastroEstiloService.excluir(estilo);
+		} catch (ImpossivelExcluirEntidadeException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+		return ResponseEntity.ok().build();
 	}
 	
 }
