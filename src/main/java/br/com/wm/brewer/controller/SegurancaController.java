@@ -23,10 +23,4 @@ public class SegurancaController {
 		return "403";
 	}
 	
-	//Temporario
-	@RequestMapping("/")
-	public String inicio() {
-		return "redirect:/cervejas";
-	}
-	
 }
