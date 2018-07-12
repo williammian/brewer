@@ -52,7 +52,16 @@ public class RelatoriosController {
 	
 	@PostMapping("/vendasEmitidas2") //utilizando api do jasper diretamente
 	public ResponseEntity<byte[]> gerarRelatorioVendasEmitidas2(PeriodoRelatorio periodoRelatorio) throws Exception {
-		byte[] relatorio = relatorioService.gerarRelatorioVendasEmitidas(periodoRelatorio); 
+		byte[] relatorio = relatorioService.gerarRelatorioVendasEmitidas2(periodoRelatorio); 
+		
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE)
+				.body(relatorio);
+	}
+	
+	@PostMapping("/vendasEmitidas3") //utilizando api do jasper diretamente e executando consulta via jpa/hibernate, Multimap, MultiMapDataSet
+	public ResponseEntity<byte[]> gerarRelatorioVendasEmitidas3(PeriodoRelatorio periodoRelatorio) throws Exception {
+		byte[] relatorio = relatorioService.gerarRelatorioVendasEmitidas3(periodoRelatorio); 
 		
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE)
