@@ -1,4 +1,4 @@
-package br.com.wm.brewer.common;
+package br.com.wm.brewer.common.util;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRField;

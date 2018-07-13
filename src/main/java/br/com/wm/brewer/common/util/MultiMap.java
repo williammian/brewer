@@ -1,4 +1,4 @@
-package br.com.wm.brewer.common;
+package br.com.wm.brewer.common.util;
 
 import java.math.BigInteger;
 import java.util.ArrayList;

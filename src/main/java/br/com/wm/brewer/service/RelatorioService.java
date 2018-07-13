@@ -15,8 +15,8 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.wm.brewer.common.MultiMap;
-import br.com.wm.brewer.common.MultiMapDataSet;
+import br.com.wm.brewer.common.util.MultiMap;
+import br.com.wm.brewer.common.util.MultiMapDataSet;
 import br.com.wm.brewer.dto.PeriodoRelatorio;
 import br.com.wm.brewer.repository.Vendas;
 import net.sf.jasperreports.engine.JasperExportManager;

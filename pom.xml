@@ -78,6 +78,9 @@
 	<!-- JasperReports Fonts -->
 	<jasperreports-fonts.version>6.0.0</jasperreports-fonts.version>
 	
+	<!-- Apache commons io -->
+	<commons-io.version>2.5</commons-io.version>
+	
   </properties>
   
   <build>
@@ -316,6 +319,14 @@
 	    <groupId>net.sf.jasperreports</groupId>
 	    <artifactId>jasperreports-fonts</artifactId>
 	    <version>${jasperreports-fonts.version}</version>
+	    <scope>compile</scope>
+	</dependency>
+	
+	<!-- Apache commons io -->
+	<dependency>
+	    <groupId>commons-io</groupId>
+	    <artifactId>commons-io</artifactId>
+	    <version>${commons-io.version}</version>
 	    <scope>compile</scope>
 	</dependency>
 	
