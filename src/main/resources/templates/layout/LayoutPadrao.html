@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
@@ -13,9 +13,9 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/algaworks.min.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/application.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/brewer.css}"/>
-	
+
 	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap-datepicker.standalone.min.css}"/>
-	
+
 	<link rel="shortcut icon" th:href="@{/images/favicon.png}"/>
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -30,13 +30,13 @@
 <input type="hidden" name="_csrf_header" th:value="${_csrf.headerName}"/>
 
 <div class="aw-layout-page">
-	
+
 	<div th:replace="layout/fragments/BarraNavegacao :: navbar"></div>
-	
+
 	<div th:replace="layout/fragments/MenuLateral :: layout-sidebar"></div>
-	
+
 	<section class="aw-layout-content  js-content" layout:fragment="conteudo"></section>
-	
+
 	<div th:replace="layout/fragments/Footer :: layout-footer"></div>
 </div>
 <script th:src="@{/layout/javascripts/vendors.min.js}"></script>
@@ -57,4 +57,4 @@
 
 <th:block layout:fragment="javascript-extra"></th:block>
 </body>
-</html> 
+</html>
