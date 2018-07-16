@@ -16,7 +16,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-10">
-					<h1 th:if="${cliente.novo}">Cadastro de cliente</h1>
+					<h1 th:if="${cliente.novo}">Cadastro de cliente</h1> 
 					<h1 th:unless="${cliente.novo}" th:text="|Edição do ${cliente.nome}|">Edição de cliente</h1>
 				</div>
 			
