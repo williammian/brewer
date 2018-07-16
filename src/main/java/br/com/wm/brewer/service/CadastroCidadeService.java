@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.wm.brewer.model.Cidade;
-import br.com.wm.brewer.model.Estilo;
 import br.com.wm.brewer.repository.Cidades;
 import br.com.wm.brewer.service.exception.ImpossivelExcluirEntidadeException;
 import br.com.wm.brewer.service.exception.NomeCidadeJaCadastradaException;
