@@ -83,6 +83,9 @@
 	<!-- Apache commons io -->
 	<commons-io.version>2.5</commons-io.version>
 	
+	<!-- AWS SDK - S3 -->
+	<aws-java-sdk-s3.version>1.10.77</aws-java-sdk-s3.version>
+	
   </properties>
   
   <build>
@@ -332,6 +335,13 @@
 	    <artifactId>commons-io</artifactId>
 	    <version>${commons-io.version}</version>
 	    <scope>compile</scope>
+	</dependency>
+	
+	<!-- AWS SDK - S3 -->
+	<dependency>
+		<groupId>com.amazonaws</groupId>
+		<artifactId>aws-java-sdk-s3</artifactId>
+		<version>${aws-java-sdk-s3.version}</version>
 	</dependency>
 	
   </dependencies>
