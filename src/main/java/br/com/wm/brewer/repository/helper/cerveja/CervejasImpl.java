@@ -22,6 +22,7 @@ import br.com.wm.brewer.dto.ValorItensEstoque;
 import br.com.wm.brewer.model.Cerveja;
 import br.com.wm.brewer.repository.filter.CervejaFilter;
 import br.com.wm.brewer.repository.paginacao.PaginacaoUtil;
+import br.com.wm.brewer.storage.FotoStorage;
 
 public class CervejasImpl implements CervejasQueries {
 
@@ -30,6 +31,9 @@ public class CervejasImpl implements CervejasQueries {
 	
 	@Autowired
 	private PaginacaoUtil paginacaoUtil;
+	
+	@Autowired
+	private FotoStorage fotoStorage;
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -47,6 +51,17 @@ public class CervejasImpl implements CervejasQueries {
 	public ValorItensEstoque valorItensEstoque() {
 		String query = "select new br.com.wm.brewer.dto.ValorItensEstoque(sum(valor * quantidadeEstoque), sum(quantidadeEstoque)) from Cerveja";
 		return manager.createQuery(query, ValorItensEstoque.class).getSingleResult();
+	}
+	
+	@Override
+	public List<CervejaDTO> porSkuOuNome(String skuOuNome) {
+		String jpql = "select new br.com.wm.brewer.dto.CervejaDTO(codigo, sku, nome, origem, valor, foto) "
+				+ "from Cerveja where lower(sku) like lower(:skuOuNome) or lower(nome) like lower(:skuOuNome)";
+		List<CervejaDTO> cervejasFiltradas = manager.createQuery(jpql, CervejaDTO.class)
+					.setParameter("skuOuNome", skuOuNome + "%")
+					.getResultList();
+		cervejasFiltradas.forEach(c -> c.setUrlThumbnailFoto(fotoStorage.getUrl(FotoStorage.THUMBNAIL_PREFIX + c.getFoto())));
+		return cervejasFiltradas;
 	}
 	
 	private Long total(CervejaFilter filtro) {
@@ -90,16 +105,6 @@ public class CervejasImpl implements CervejasQueries {
 	
 	private boolean isEstiloPresente(CervejaFilter filtro) {
 		return filtro.getEstilo() != null && filtro.getEstilo().getCodigo() != null;
-	}
-	
-	@Override
-	public List<CervejaDTO> porSkuOuNome(String skuOuNome) {
-		String jpql = "select new br.com.wm.brewer.dto.CervejaDTO(codigo, sku, nome, origem, valor, foto) "
-				+ "from Cerveja where lower(sku) like lower(:skuOuNome) or lower(nome) like lower(:skuOuNome)";
-		List<CervejaDTO> cervejasFiltradas = manager.createQuery(jpql, CervejaDTO.class)
-					.setParameter("skuOuNome", skuOuNome + "%")
-					.getResultList();
-		return cervejasFiltradas;
 	}
 
 }
