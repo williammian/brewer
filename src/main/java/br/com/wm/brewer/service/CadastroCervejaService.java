@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.wm.brewer.model.Cerveja;
 import br.com.wm.brewer.repository.Cervejas;
-import br.com.wm.brewer.service.event.cerveja.CervejaSalvaEvent;
 import br.com.wm.brewer.service.exception.ImpossivelExcluirEntidadeException;
 import br.com.wm.brewer.storage.FotoStorage;
 
@@ -28,8 +27,6 @@ public class CadastroCervejaService {
 	@Transactional
 	public void salvar(Cerveja cerveja) {
 		cervejas.save(cerveja);
-		
-		publisher.publishEvent(new CervejaSalvaEvent(cerveja));
 	}
 	
 	@Transactional
