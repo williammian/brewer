@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,17 +99,6 @@ public class FotoStorageLocal implements FotoStorage {
 		} catch (IOException e) {
 			throw new RuntimeException("Erro criando pasta para salvar foto", e);
 		}
-	}
-	
-	private String renomearArquivo(String nomeOriginal) {
-		String novoNome = UUID.randomUUID().toString() + "_" + nomeOriginal;
-		
-		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("Nome original: %s, novo nome: %s", nomeOriginal, novoNome));
-		}
-		
-		return novoNome;
-		
 	}
 
 }
